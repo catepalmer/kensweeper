@@ -1,5 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import {
+    useDispatch,
+    useSelector as useReduxSelector,
+    TypedUseSelectorHook,
+} from 'react-redux';
+import CLICK_MINE from '../actions/actionTypes';
+import CLICK_SQUARE from '../actions/actionTypes';
+import FLAG_SQUARE from '../actions/actionTypes';
 
 type Props = {
     index: number;
@@ -26,13 +34,10 @@ const StyledSquare = styled.div`
   text-transform: uppercase;
 `
 
-const handleClick = () => {
-    
-}
-
 const Square = ({index, isMine}: Props) => {
+    const dispatch = useDispatch();
   return (
-    <StyledSquare onClick={handleClick}>
+    <StyledSquare onClick={() => dispatch(isMine ? { type: CLICK_MINE, payload: index } : { type: CLICK_SQUARE, payload: index })} onContextMenu={() => dispatch({ type: FLAG_SQUARE, payload: index })}>
         <StyledImage />
     </StyledSquare>
   );

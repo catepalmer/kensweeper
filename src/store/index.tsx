@@ -1,12 +1,9 @@
-import { createStore } from 'redux'
-import { devToolsEnhancer } from 'redux-devtools-extension'
+import { createStore, Reducer } from 'redux'
 
 import { reducer } from '../reducers/index'
 
-type Reducer = typeof reducer;
-
 const configureStore = () => {
-  return createStore(reducer, devToolsEnhancer())
+  return createStore(reducer as Reducer)
 }
 
 export default configureStore;
