@@ -14,19 +14,22 @@ import flag from '../images/flag.png';
 import ken from '../images/ken.jpg';
 import mine from '../images/mine.png';
 
-type Props = {
+type SquareProps = {
     index: number;
-    isMine: boolean;
 };
+
+type StyledSquareProps = {
+    isLosingSquare: boolean | null;
+}
 
 const StyledImage = styled.img`
     height: 6.5vh;
     width: 6.5vh;
     margin: auto;
     border: none;
-`;
-
-const StyledSquare = styled.div`
+    `;
+    
+    const StyledSquare = styled.div`
     border-color: hsla(0, 0%, 0%, 0.2);
     border-style: solid;
     border-width: 2px;
@@ -36,24 +39,26 @@ const StyledSquare = styled.div`
     line-height: 7vh;
     text-align: center;
     text-transform: uppercase;
+    background-color: ${(props: StyledSquareProps) => props.isLosingSquare ? 'red' : 'white'};
 `;
 
-const Square = ({ index, isMine }: Props) => {
+const Square = ({ index }: SquareProps) => {
     const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
     const dispatch = useDispatch();
     const state = useSelector(state => state);
     const mines = state ? state.mines : [];
+    const isMine = mines && mines.find(mine => mine === index);
     const moves = state ? state.moves : [];
+    const isLosingSquare = state ? state.losingSquare === index : null;
     const flaggedSquares = state
         ? state.flaggedSquares
         : setInitialFlaggedSquares(81);
     const isFlagged = flaggedSquares.find((square, i) => i === index);
     const isPlayed = !!moves.find(square => square === index);
     const minesTouching = getMinesTouching(index, mines);
-    const displayImage =
-        isFlagged || (isPlayed && (isMine || minesTouching === 0));
     const displayMinesTouching =
         isPlayed && !isMine && !isFlagged && minesTouching && minesTouching > 0;
+    const displayImage = (isPlayed || isFlagged) && (isMine || minesTouching === 0);
     const imageSrc = isFlagged
         ? flag
         : isMine
@@ -62,24 +67,26 @@ const Square = ({ index, isMine }: Props) => {
         ? ken
         : '';
 
-    const handleRightClick = (e: MouseEvent) => {
-        e.preventDefault();
-        dispatch(actions.flagSquare(index));
+        
+        const handleRightClick = (e: MouseEvent) => {
+            e.preventDefault();
+            if (!isPlayed) {
+                dispatch(actions.flagSquare(index));
+            }
+        };
+        
+        const handleClick = () => {
+            console.log(`displayImage: ${displayImage}. isPlayed: ${isPlayed}. isMine: ${isMine}`)
+        dispatch(isMine ? actions.clickMine(index) : actions.clickSquare(index));
     };
 
     return (
         <StyledSquare
-            onClick={() =>
-                dispatch(
-                    isMine
-                        ? actions.clickMine(index)
-                        : actions.clickSquare(index)
-                )
-            }
+            isLosingSquare={isLosingSquare}
+            onClick={handleClick}
             onContextMenu={(e: MouseEvent) => handleRightClick(e)}
         >
-            {displayImage ? <StyledImage src={imageSrc} /> : ''}
-            {displayMinesTouching ? minesTouching : ''}
+            {displayMinesTouching ? minesTouching : displayImage ? <StyledImage src={imageSrc} /> : ''}
         </StyledSquare>
     );
 };

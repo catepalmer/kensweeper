@@ -33,9 +33,7 @@ const mines = setMines(smallBoard);
 const createSquares = (board: Board) => {
     let squares = [];
     for (let i = 0; i < board.numSquares; i++) {
-        const isMine = mines.find(mine => mine === i);
-        if (isMine) squares.push(<Square key={i} index={i} isMine={true} />);
-        else squares.push(<Square key={i} index={i} isMine={false} />);
+        squares.push(<Square key={i} index={i} />);
     }
     return squares;
 };

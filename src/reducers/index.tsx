@@ -15,6 +15,7 @@ type Action = {
 };
 
 const initialState = {
+    losingSquare: null,
     mines: [],
     moves: [],
     flaggedSquares: setInitialFlaggedSquares(81),
@@ -23,21 +24,19 @@ const initialState = {
 export const reducer = (state = initialState, action: Action) => {
     switch (action.type) {
         case CLICK_MINE: {
-            console.log(`in action.CLICK_MINE`);
             return {
                 ...state,
                 losingSquare: action.payload.index,
+                moves: [...state.moves, action.payload.index],
             };
         }
         case CLICK_SQUARE: {
-            console.log(`in action.CLICK_SQUARE`);
             return {
                 ...state,
                 moves: [...state.moves, action.payload.index],
             };
         }
         case FLAG_SQUARE: {
-            console.log(`in action.FLAG_SQUARE`);
             return {
                 ...state,
                 flaggedSquares: state.flaggedSquares.map((bool, i) => {
@@ -46,7 +45,6 @@ export const reducer = (state = initialState, action: Action) => {
             };
         }
         case SET_MINES: {
-            console.log(`in action.SET_MINES`);
             return {
                 ...state,
                 mines: action.payload.mines,
