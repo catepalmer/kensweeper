@@ -1,7 +1,7 @@
 type Board = {
     numSquares: number;
     numMines: number;
-}
+};
 
 type Mines = number[];
 
@@ -12,6 +12,6 @@ const setMines = (board: Board) => {
         if (!mines.includes(mine)) mines.push(mine);
     }
     return mines;
-}
+};
 
 export default setMines;
