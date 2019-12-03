@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
 import Board from './Board';
+import NewGameButton from './NewGameButton';
 import Square from './Square';
 
 import setMines from '../utilities/setMines';
@@ -44,6 +45,7 @@ const App: React.FC = () => {
     return (
         <StyledApp>
             <Board>{createSquares(smallBoard)}</Board>
+            <NewGameButton />
         </StyledApp>
     );
 };

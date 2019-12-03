@@ -20,16 +20,16 @@ type SquareProps = {
 
 type StyledSquareProps = {
     isLosingSquare: boolean | null;
-}
+};
 
 const StyledImage = styled.img`
     height: 6.5vh;
     width: 6.5vh;
     margin: auto;
     border: none;
-    `;
-    
-    const StyledSquare = styled.div`
+`;
+
+const StyledSquare = styled.div`
     border-color: hsla(0, 0%, 0%, 0.2);
     border-style: solid;
     border-width: 2px;
@@ -39,7 +39,8 @@ const StyledImage = styled.img`
     line-height: 7vh;
     text-align: center;
     text-transform: uppercase;
-    background-color: ${(props: StyledSquareProps) => props.isLosingSquare ? 'red' : 'white'};
+    background-color: ${(props: StyledSquareProps) =>
+        props.isLosingSquare ? 'red' : 'white'};
 `;
 
 const Square = ({ index }: SquareProps) => {
@@ -49,7 +50,8 @@ const Square = ({ index }: SquareProps) => {
     const mines = state ? state.mines : [];
     const isMine = mines && mines.find(mine => mine === index);
     const moves = state ? state.moves : [];
-    const isLosingSquare = state ? state.losingSquare === index : null;
+    const losingSquare = state ? state.losingSquare : '';
+    const isLosingSquare = losingSquare === index;
     const flaggedSquares = state
         ? state.flaggedSquares
         : setInitialFlaggedSquares(81);
@@ -58,7 +60,9 @@ const Square = ({ index }: SquareProps) => {
     const minesTouching = getMinesTouching(index, mines);
     const displayMinesTouching =
         isPlayed && !isMine && !isFlagged && minesTouching && minesTouching > 0;
-    const displayImage = (isPlayed || isFlagged) && (isMine || minesTouching === 0);
+    const displayImage =
+        ((isPlayed || isFlagged) && minesTouching === 0) ||
+        (losingSquare && isMine);
     const imageSrc = isFlagged
         ? flag
         : isMine
@@ -67,17 +71,17 @@ const Square = ({ index }: SquareProps) => {
         ? ken
         : '';
 
-        
-        const handleRightClick = (e: MouseEvent) => {
-            e.preventDefault();
-            if (!isPlayed) {
-                dispatch(actions.flagSquare(index));
-            }
-        };
-        
-        const handleClick = () => {
-            console.log(`displayImage: ${displayImage}. isPlayed: ${isPlayed}. isMine: ${isMine}`)
-        dispatch(isMine ? actions.clickMine(index) : actions.clickSquare(index));
+    const handleRightClick = (e: MouseEvent) => {
+        e.preventDefault();
+        if (!isPlayed) {
+            dispatch(actions.flagSquare(index));
+        }
+    };
+
+    const handleClick = () => {
+        dispatch(
+            isMine ? actions.clickMine(index) : actions.clickSquare(index)
+        );
     };
 
     return (
@@ -86,7 +90,13 @@ const Square = ({ index }: SquareProps) => {
             onClick={handleClick}
             onContextMenu={(e: MouseEvent) => handleRightClick(e)}
         >
-            {displayMinesTouching ? minesTouching : displayImage ? <StyledImage src={imageSrc} /> : ''}
+            {displayMinesTouching ? (
+                minesTouching
+            ) : displayImage ? (
+                <StyledImage src={imageSrc} />
+            ) : (
+                ''
+            )}
         </StyledSquare>
     );
 };
