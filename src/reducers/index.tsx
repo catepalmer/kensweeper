@@ -6,10 +6,10 @@ import {
 } from '../actions/actionTypes';
 import setInitialFlaggedSquares from '../utilities/setInitialFlaggedSquares';
 
-type Action = {
+export type Action = {
     type: string;
     payload: {
-        index?: number;
+        index?: number | undefined;
         mines?: number[];
     };
 };

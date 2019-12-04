@@ -10,6 +10,20 @@ const clickMine = (index: number) => ({
     payload: { index },
 });
 
+// const clickSquare = (index: number, mines: number[] | undefined) => {
+//     const minesTouching = getMinesTouching(index, mines);
+//     if (minesTouching === 0) {
+//         const squaresTouchingArray = getSquaresTouching(index);
+//         squaresTouchingArray.forEach(square => {
+//             clickSquare(square, mines);
+//         })
+//     }
+//     return {
+//         type: CLICK_SQUARE,
+//         payload: { index },  
+//     }
+// }
+
 const clickSquare = (index: number) => ({
     type: CLICK_SQUARE,
     payload: { index },

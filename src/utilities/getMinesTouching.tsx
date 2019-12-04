@@ -1,8 +1,8 @@
 import getSquaresTouching from './getSquaresTouching';
 
-const getMinesTouching = (index: number, mines: number[] | undefined) => {
+const getMinesTouching = (index: number | undefined, mines: number[] | undefined) => {
     const squaresTouchingArray = getSquaresTouching(index);
-    if (mines) {
+    if (mines && squaresTouchingArray) {
         const minesTouchingArray = squaresTouchingArray.filter(square =>
             mines.includes(square)
         );

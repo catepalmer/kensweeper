@@ -1,9 +1,20 @@
-import { createStore, Reducer } from 'redux';
+import { applyMiddleware, createStore, Reducer } from 'redux';
+import { createEpicMiddleware } from 'redux-observable';
 
 import { reducer } from '../reducers/index';
+import checkForBlankEpic from '../epics/checkForBlank';
+
+const epicMiddleware = createEpicMiddleware();
 
 const configureStore = () => {
-    return createStore(reducer as Reducer);
-};
+  const store = createStore(
+    reducer as Reducer,
+    applyMiddleware(epicMiddleware)
+  );
+
+  epicMiddleware.run(checkForBlankEpic);
+
+  return store;
+}
 
 export default configureStore;
