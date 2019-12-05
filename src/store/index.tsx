@@ -7,14 +7,14 @@ import checkForBlankEpic from '../epics/checkForBlank';
 const epicMiddleware = createEpicMiddleware();
 
 const configureStore = () => {
-  const store = createStore(
-    reducer as Reducer,
-    applyMiddleware(epicMiddleware)
-  );
+    const store = createStore(
+        reducer as Reducer,
+        applyMiddleware(epicMiddleware)
+    );
 
-  epicMiddleware.run(checkForBlankEpic);
+    epicMiddleware.run(checkForBlankEpic);
 
-  return store;
-}
+    return store;
+};
 
 export default configureStore;

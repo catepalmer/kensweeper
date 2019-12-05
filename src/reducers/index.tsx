@@ -50,6 +50,11 @@ export const reducer = (state = initialState, action: Action) => {
                 mines: action.payload.mines,
             };
         }
+        default: {
+            return {
+                ...state,
+            };
+        }
     }
 };
 

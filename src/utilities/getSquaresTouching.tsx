@@ -13,14 +13,20 @@ const getSquaresTouching = (index: number | undefined) => {
         const below = index + 9;
         const belowRight = index + 10;
         let squaresTouchingArray;
-    
+
         if (inTopRow) {
             if (inLeftColumn) {
                 squaresTouchingArray = [right, below, belowRight];
             } else if (inRightColumn) {
                 squaresTouchingArray = [left, belowLeft, below];
             } else {
-                squaresTouchingArray = [left, right, belowLeft, below, belowRight];
+                squaresTouchingArray = [
+                    left,
+                    right,
+                    belowLeft,
+                    below,
+                    belowRight,
+                ];
             }
         } else if (inBottomRow) {
             if (inLeftColumn) {
@@ -28,7 +34,13 @@ const getSquaresTouching = (index: number | undefined) => {
             } else if (inRightColumn) {
                 squaresTouchingArray = [aboveLeft, above, left];
             } else {
-                squaresTouchingArray = [aboveLeft, above, aboveRight, left, right];
+                squaresTouchingArray = [
+                    aboveLeft,
+                    above,
+                    aboveRight,
+                    left,
+                    right,
+                ];
             }
         } else {
             squaresTouchingArray = [
