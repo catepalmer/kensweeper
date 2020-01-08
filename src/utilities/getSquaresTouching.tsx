@@ -1,7 +1,7 @@
 const getSquaresTouching = (index: number | undefined) => {
     if (index !== undefined) {
         const inTopRow = index < 9;
-        const inBottomRow = index > 72;
+        const inBottomRow = index > 71;
         const inLeftColumn = index % 9 === 0;
         const inRightColumn = (index + 1) % 9 === 0;
         const aboveLeft = index - 10;
@@ -42,6 +42,22 @@ const getSquaresTouching = (index: number | undefined) => {
                     right,
                 ];
             }
+        } else if (inLeftColumn) {
+            squaresTouchingArray = [
+                above,
+                aboveRight,
+                right,
+                below,
+                belowRight
+            ]
+        } else if (inRightColumn) {
+            squaresTouchingArray = [
+                aboveLeft,
+                above,
+                left,
+                belowLeft,
+                below
+            ]
         } else {
             squaresTouchingArray = [
                 aboveLeft,
