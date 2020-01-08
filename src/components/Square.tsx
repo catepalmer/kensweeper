@@ -6,9 +6,14 @@ import {
     TypedUseSelectorHook,
 } from 'react-redux';
 import { AppState } from '../reducers/index';
+import checkDisplayImage from '../utilities/checkDisplayImage';
+import checkDisplayMinesTouching from '../utilities/checkDisplayMinesTouching';
+import checkIfFlagged from '../utilities/checkIfFlagged';
+import checkIfMine from '../utilities/checkIfMine';
+import checkIfPlayed from '../utilities/checkIfPlayed';
+import getMinesTouching from '../utilities/getMinesTouching';
 import setInitialFlaggedSquares from '../utilities/setInitialFlaggedSquares';
 import actions from '../actions/actions';
-import getMinesTouching from '../utilities/getMinesTouching';
 
 import flag from '../images/flag.png';
 import ken from '../images/ken.jpg';
@@ -47,22 +52,32 @@ const Square = ({ index }: SquareProps) => {
     const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
     const dispatch = useDispatch();
     const state = useSelector(state => state);
+
     const mines = state ? state.mines : [];
-    const isMine = mines && mines.find(mine => mine === index);
     const moves = state ? state.moves : [];
     const losingSquare = state ? state.losingSquare : '';
-    const isLosingSquare = losingSquare === index;
     const flaggedSquares = state
         ? state.flaggedSquares
         : setInitialFlaggedSquares(81);
-    const isFlagged = flaggedSquares.find((square, i) => i === index);
-    const isPlayed = !!moves.find(square => square === index);
+
+    const isMine = checkIfMine(index, mines);
+    const isLosingSquare = losingSquare === index;
+    const isFlagged = checkIfFlagged(index, flaggedSquares);
+    const isPlayed = checkIfPlayed(index, moves);
     const minesTouching = getMinesTouching(index, mines);
-    const displayMinesTouching =
-        isPlayed && !isMine && !isFlagged && minesTouching && minesTouching > 0;
-    const displayImage =
-        ((isPlayed || isFlagged) && minesTouching === 0) ||
-        (losingSquare && isMine);
+    const displayMinesTouching = checkDisplayMinesTouching(
+        isPlayed,
+        isMine,
+        isFlagged,
+        minesTouching
+    );
+    const displayImage = checkDisplayImage(
+        isPlayed,
+        isMine,
+        isFlagged,
+        minesTouching,
+        losingSquare
+    );
     const imageSrc = isFlagged
         ? flag
         : isMine

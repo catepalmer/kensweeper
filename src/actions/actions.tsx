@@ -10,7 +10,7 @@ const clickMine = (index: number) => ({
     payload: { index },
 });
 
-const clickSquare = (index: number) => ({
+const clickSquare = (index: number | number[]) => ({
     type: CLICK_SQUARE,
     payload: { index },
 });

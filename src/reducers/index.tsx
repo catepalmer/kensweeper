@@ -31,10 +31,17 @@ export const reducer = (state = initialState, action: Action) => {
             };
         }
         case CLICK_SQUARE: {
-            return {
-                ...state,
-                moves: [...state.moves, action.payload.index],
-            };
+            if (typeof(action.payload.index) === 'number') {
+                return {
+                    ...state,
+                    moves: [...state.moves, action.payload.index],
+                };
+            } else if (typeof(action.payload.index) === 'object') {
+                return {
+                    ...state,
+                    moves: [...state.moves].concat(action.payload.index),
+                };
+            }
         }
         case FLAG_SQUARE: {
             return {

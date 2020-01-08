@@ -1,18 +1,17 @@
 import { applyMiddleware, createStore, Reducer } from 'redux';
-import { createEpicMiddleware } from 'redux-observable';
-
 import { reducer } from '../reducers/index';
-import checkForBlankEpic from '../epics/checkForBlank';
+import createSagaMiddleware from 'redux-saga';
+import clickSurroundingSquaresSaga from '../sagas/clickSurroundingSquares';
 
-const epicMiddleware = createEpicMiddleware();
+const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = () => {
     const store = createStore(
         reducer as Reducer,
-        applyMiddleware(epicMiddleware)
+        applyMiddleware(sagaMiddleware)
     );
 
-    epicMiddleware.run(checkForBlankEpic);
+    sagaMiddleware.run(clickSurroundingSquaresSaga);
 
     return store;
 };

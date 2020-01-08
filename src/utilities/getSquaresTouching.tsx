@@ -1,5 +1,5 @@
 const getSquaresTouching = (index: number | undefined) => {
-    if (index) {
+    if (index !== undefined) {
         const inTopRow = index < 9;
         const inBottomRow = index > 72;
         const inLeftColumn = index % 9 === 0;
