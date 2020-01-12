@@ -27,19 +27,19 @@ export const reducer = (state = initialState, action: Action) => {
             return {
                 ...state,
                 losingSquare: action.payload.index,
-                moves: [...state.moves, action.payload.index],
+                moves: [...state.moves.filter((move, i) => state.moves.indexOf(move) === i), action.payload.index],
             };
         }
         case CLICK_SQUARE: {
             if (typeof(action.payload.index) === 'number') {
                 return {
                     ...state,
-                    moves: [...state.moves, action.payload.index],
+                    moves: [...state.moves.filter((move, i) => state.moves.indexOf(move) === i), action.payload.index],
                 };
             } else if (typeof(action.payload.index) === 'object') {
                 return {
                     ...state,
-                    moves: [...state.moves].concat(action.payload.index),
+                    moves: [...state.moves.filter((move, i) => state.moves.indexOf(move) === i), action.payload.index],
                 };
             }
         }

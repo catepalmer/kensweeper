@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 const StyledForm = styled.form`
     font-family: 'Verdana', sans-serif;
-    height: 50vh;
-    width: 50vw;
+    height: fit-content;
 `;
 
 const NewGameButton: React.FC = () => {

@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-
+import {
+    useDispatch,
+    useSelector as useReduxSelector,
+    TypedUseSelectorHook,
+} from 'react-redux';
+import { AppState } from '../reducers/index';
 import Board from './Board';
 import NewGameButton from './NewGameButton';
 import Square from './Square';
@@ -41,11 +45,19 @@ const createSquares = (board: Board) => {
 
 const App: React.FC = () => {
     const dispatch = useDispatch();
-    dispatch(actions.setMines(mines));
+    React.useEffect(() => {
+        dispatch(actions.setMines(mines));
+    }, [])
+    const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
+    const state = useSelector(state => state);
+    const displayWin = state.moves.length + state.flaggedSquares.filter(square => square).length === smallBoard.numSquares;
+    const displayLoss = state.losingSquare !== null;
+
     return (
         <StyledApp>
             <Board>{createSquares(smallBoard)}</Board>
             <NewGameButton />
+            {displayWin ? <h1>YOU WON!</h1> : displayLoss ? <h1>YOU LOST!</h1> : ''}
         </StyledApp>
     );
 };
