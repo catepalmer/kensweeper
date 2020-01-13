@@ -15,9 +15,9 @@ const Board = styled.div`
         'fifty-four fifty-five fifty-six fifty-seven fifty-eight fifty-nine sixty sixty-one sixty-two'
         'sixty-three sixty-four sixty-five sixty-six sixty-seven sixty-eight sixty-nine seventy seventy-one'
         'seventy-two seventy-three seventy-four seventy-five seventy-six seventy-seven seventy-eight seventy-nine eighty';
-    grid-template-columns: 7vh 7vh 7vh 7vh 7vh 7vh 7vh 7vh 7vh;
-    grid-template-rows: 7vh 7vh 7vh 7vh 7vh 7vh 7vh 7vh 7vh;
-    height: 63vh;
+    grid-template-columns: repeat(9, 7vh);
+    grid-template-rows: repeat(9, 7vh);
+    height: 70vh;
     justify-self: center;
     margin: auto;
     width: 63vh;

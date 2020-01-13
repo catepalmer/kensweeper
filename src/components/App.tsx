@@ -7,6 +7,7 @@ import {
 } from 'react-redux';
 import { AppState } from '../reducers/index';
 import Board from './Board';
+import Header from './Header';
 import NewGameButton from './NewGameButton';
 import Square from './Square';
 
@@ -37,8 +38,12 @@ const mines = setMines(smallBoard);
 
 const createSquares = (board: Board) => {
     let squares = [];
-    for (let i = 0; i < board.numSquares; i++) {
-        squares.push(<Square key={i} index={i} />);
+    for (let i = 0; i < board.numSquares + 1; i++) {
+        if (i === 0) {
+            squares.push(<Header />);
+        } else {
+            squares.push(<Square key={i} index={i} />);
+        }
     }
     return squares;
 };
