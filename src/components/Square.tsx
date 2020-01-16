@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { CSSProperties, MouseEvent } from 'react';
 import styled from 'styled-components';
 import {
     useDispatch,
@@ -32,7 +32,27 @@ const StyledImage = styled.img`
     width: 6.5vh;
     margin: auto;
     border: none;
-`;
+    `;
+
+const purple = `#9600FF`;
+const darkBlue = `#4900FF`;
+const lightBlue = `#00B8FF`;
+const lightTeal = `#00FFF9`;
+const darkTeal = `#02C6C9`;
+const magenta = `#FF00C0`;
+const green = `	#00E788`;
+const hotPink = `#FA2681`;
+
+const colours = [
+    `#9600FF`,
+    `#02C6C9`,
+    `#00E788`,
+    `#FA2681`,
+    `#4900FF`,
+    `#FF00C0`,
+    `#00B8FF`,
+    `#00FFF9`
+];
 
 const StyledSquare = styled.div`
     border-color: hsla(0, 0%, 0%, 0.2);
@@ -48,6 +68,7 @@ const StyledSquare = styled.div`
         props.isLosingSquare ? 'red' : 'white'};
 `;
 
+
 const Square = ({ index }: SquareProps) => {
     const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
     const dispatch = useDispatch();
@@ -57,14 +78,16 @@ const Square = ({ index }: SquareProps) => {
     const moves = state ? state.moves : [];
     const losingSquare = state ? state.losingSquare : '';
     const flaggedSquares = state
-        ? state.flaggedSquares
-        : setInitialFlaggedSquares(81);
-
+    ? state.flaggedSquares
+    : setInitialFlaggedSquares(81);
+    
     const isMine = checkIfMine(index, mines);
     const isLosingSquare = losingSquare === index;
     const isFlagged = checkIfFlagged(index, flaggedSquares);
     const isPlayed = checkIfPlayed(index, moves);
     const minesTouching = getMinesTouching(index, mines);
+    const colour = colours.find((hex, i) => i === (minesTouching ? minesTouching - 1 : null)); 
+    const colourStyle: CSSProperties = { color: colour ? colour : '' };
     const displayMinesTouching = checkDisplayMinesTouching(
         isPlayed,
         isMine,
@@ -104,6 +127,7 @@ const Square = ({ index }: SquareProps) => {
             isLosingSquare={isLosingSquare}
             onClick={handleClick}
             onContextMenu={(e: MouseEvent) => handleRightClick(e)}
+            style={colourStyle}
         >
             {displayMinesTouching ? (
                 minesTouching

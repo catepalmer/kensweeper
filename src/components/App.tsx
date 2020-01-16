@@ -31,7 +31,7 @@ type Board = {
 
 const smallBoard = {
     numSquares: 81,
-    numMines: 10,
+    numMines: 27,
 };
 
 const mines = setMines(smallBoard);
@@ -39,11 +39,7 @@ const mines = setMines(smallBoard);
 const createSquares = (board: Board) => {
     let squares = [];
     for (let i = 0; i < board.numSquares + 1; i++) {
-        if (i === 0) {
-            squares.push(<Header />);
-        } else {
-            squares.push(<Square key={i} index={i} />);
-        }
+        squares.push(<Square key={i} index={i} />);
     }
     return squares;
 };
