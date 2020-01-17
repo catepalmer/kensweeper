@@ -1,0 +1,18 @@
+// ----------------------------------------------------------------------------
+// Spacing
+// ----------------------------------------------------------------------------
+
+$spacing-base: 16px;
+
+$spacing-xxsmall: $spacing-base * 0.25; // 4px
+$spacing-xsmall: $spacing-base * 0.5; // 8px
+$spacing-small: $spacing-base * 0.75; // 12px
+$spacing-small-med: $spacing-base * 0.875; // 14px
+
+$spacing-med-large: $spacing-base * 1.5; // 24px
+$spacing-large: $spacing-base * 1.75; // 28px
+$spacing-xlarge: $spacing-base * 2; // 32px
+$spacing-xxlarge: $spacing-base * 3; // 48px
+$spacing-xxxlarge: $spacing-base * 4; // 64px
+$spacing-xxxxlarge: $spacing-base * 5; // 80px
+$spacing-xxxxxlarge: $spacing-base * 6; // 96px

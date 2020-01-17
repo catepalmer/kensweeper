@@ -2,9 +2,10 @@ import getSquaresTouching from './getSquaresTouching';
 
 const getMinesTouching = (
     index: number | undefined,
-    mines: number[] | undefined
+    mines: number[] | undefined,
+    boardSize: string
 ) => {
-    const squaresTouchingArray = getSquaresTouching(index);
+    const squaresTouchingArray = getSquaresTouching(index, boardSize);
     if (mines && squaresTouchingArray) {
         const minesTouchingArray = squaresTouchingArray.filter(square =>
             mines.includes(square)

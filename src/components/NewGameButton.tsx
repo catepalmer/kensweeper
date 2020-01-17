@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import '../sass/styles.scss';
 
 const StyledForm = styled.form`
     font-family: 'Verdana', sans-serif;

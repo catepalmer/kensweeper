@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import '../sass/styles.scss';
 
 const StyledHeader = styled.div`
     border-color: hsla(0, 0%, 0%, 0.2);
@@ -14,10 +15,7 @@ const StyledHeader = styled.div`
 `;
 
 const Header = () => {
-
-    return (
-        <StyledHeader />
-    );
+    return <StyledHeader />;
 };
 
 export default Header;

@@ -1,4 +1,5 @@
-import React, { CSSProperties, MouseEvent } from 'react';
+import React, { CSSProperties, MouseEvent, ReactElement } from 'react';
+import '../sass/styles.scss';
 import styled from 'styled-components';
 import {
     useDispatch,
@@ -21,55 +22,10 @@ import mine from '../images/mine.png';
 
 type SquareProps = {
     index: number;
+    boardSize: string;
 };
 
-type StyledSquareProps = {
-    isLosingSquare: boolean | null;
-};
-
-const StyledImage = styled.img`
-    height: 6.5vh;
-    width: 6.5vh;
-    margin: auto;
-    border: none;
-    `;
-
-const purple = `#9600FF`;
-const darkBlue = `#4900FF`;
-const lightBlue = `#00B8FF`;
-const lightTeal = `#00FFF9`;
-const darkTeal = `#02C6C9`;
-const magenta = `#FF00C0`;
-const green = `	#00E788`;
-const hotPink = `#FA2681`;
-
-const colours = [
-    `#9600FF`,
-    `#02C6C9`,
-    `#00E788`,
-    `#FA2681`,
-    `#4900FF`,
-    `#FF00C0`,
-    `#00B8FF`,
-    `#00FFF9`
-];
-
-const StyledSquare = styled.div`
-    border-color: hsla(0, 0%, 0%, 0.2);
-    border-style: solid;
-    border-width: 2px;
-    cursor: default;
-    font-size: 4vh;
-    font-weight: bold;
-    line-height: 7vh;
-    text-align: center;
-    text-transform: uppercase;
-    background-color: ${(props: StyledSquareProps) =>
-        props.isLosingSquare ? 'red' : 'white'};
-`;
-
-
-const Square = ({ index }: SquareProps) => {
+const Square = ({ index, boardSize }: SquareProps) => {
     const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
     const dispatch = useDispatch();
     const state = useSelector(state => state);
@@ -78,16 +34,14 @@ const Square = ({ index }: SquareProps) => {
     const moves = state ? state.moves : [];
     const losingSquare = state ? state.losingSquare : '';
     const flaggedSquares = state
-    ? state.flaggedSquares
-    : setInitialFlaggedSquares(81);
-    
+        ? state.flaggedSquares
+        : setInitialFlaggedSquares(81);
+
     const isMine = checkIfMine(index, mines);
     const isLosingSquare = losingSquare === index;
     const isFlagged = checkIfFlagged(index, flaggedSquares);
     const isPlayed = checkIfPlayed(index, moves);
-    const minesTouching = getMinesTouching(index, mines);
-    const colour = colours.find((hex, i) => i === (minesTouching ? minesTouching - 1 : null)); 
-    const colourStyle: CSSProperties = { color: colour ? colour : '' };
+    const minesTouching = getMinesTouching(index, mines, boardSize);
     const displayMinesTouching = checkDisplayMinesTouching(
         isPlayed,
         isMine,
@@ -117,26 +71,49 @@ const Square = ({ index }: SquareProps) => {
     };
 
     const handleClick = () => {
+        console.log(
+            `mines: ${mines}. index: ${index}. minesTouching: ${minesTouching}`
+        );
         dispatch(
             isMine ? actions.clickMine(index) : actions.clickSquare(index)
         );
     };
 
     return (
-        <StyledSquare
-            isLosingSquare={isLosingSquare}
+        <div
             onClick={handleClick}
             onContextMenu={(e: MouseEvent) => handleRightClick(e)}
-            style={colourStyle}
+            className={`square 
+                ${
+                    isLosingSquare
+                        ? 'square--losing'
+                        : minesTouching === 1
+                        ? 'u-color-magenta'
+                        : minesTouching === 2
+                        ? 'u-color-purple'
+                        : minesTouching === 3
+                        ? 'u-color-blue-dark'
+                        : minesTouching === 4
+                        ? 'u-color-green'
+                        : minesTouching === 5
+                        ? 'u-color-teal-dark'
+                        : minesTouching === 6
+                        ? 'u-color-teal-light'
+                        : minesTouching === 7
+                        ? 'u-color-pink-hot'
+                        : minesTouching === 8
+                        ? 'u-color-blue-light'
+                        : ''
+                }`}
         >
             {displayMinesTouching ? (
                 minesTouching
             ) : displayImage ? (
-                <StyledImage src={imageSrc} />
+                <img src={imageSrc} className="image--small" />
             ) : (
                 ''
             )}
-        </StyledSquare>
+        </div>
     );
 };
 

@@ -2,6 +2,7 @@ import {
     CLICK_MINE,
     CLICK_SQUARE,
     FLAG_SQUARE,
+    SET_BOARD_SIZE,
     SET_MINES,
 } from './actionTypes';
 
@@ -25,11 +26,17 @@ const setMines = (mines: number[]) => ({
     payload: { mines },
 });
 
+const setBoardSize = (boardSize: string) => ({
+    type: SET_BOARD_SIZE,
+    payload: { boardSize },
+});
+
 const actions = {
     clickMine,
     clickSquare,
     flagSquare,
     setMines,
+    setBoardSize,
 };
 
 export default actions;

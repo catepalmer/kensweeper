@@ -1,18 +1,32 @@
-const getSquaresTouching = (index: number | undefined) => {
+const getSquaresTouching = (index: number | undefined, boardSize: string) => {
     if (index !== undefined) {
-        const inTopRow = index < 9;
-        const inBottomRow = index > 71;
-        const inLeftColumn = index % 9 === 0;
-        const inRightColumn = (index + 1) % 9 === 0;
-        const aboveLeft = index - 10;
-        const above = index - 9;
-        const aboveRight = index - 8;
         const left = index - 1;
         const right = index + 1;
-        const belowLeft = index + 8;
-        const below = index + 9;
-        const belowRight = index + 10;
+        let inTopRow;
+        let inBottomRow;
+        let inLeftColumn;
+        let inRightColumn;
+        let aboveLeft;
+        let above;
+        let aboveRight;
+        let belowLeft;
+        let below;
+        let belowRight;
         let squaresTouchingArray;
+
+        if (boardSize === 'small') {
+            inTopRow = index < 8;
+            inBottomRow = index > 56;
+            inLeftColumn = index % 8 === 0;
+            inRightColumn = (index + 1) % 8 === 0;
+            aboveLeft = index - 9;
+            above = index - 8;
+            aboveRight = index - 7;
+            belowLeft = index + 7;
+            below = index + 8;
+            belowRight = index + 9;
+            squaresTouchingArray;
+        }
 
         if (inTopRow) {
             if (inLeftColumn) {
@@ -48,16 +62,10 @@ const getSquaresTouching = (index: number | undefined) => {
                 aboveRight,
                 right,
                 below,
-                belowRight
-            ]
+                belowRight,
+            ];
         } else if (inRightColumn) {
-            squaresTouchingArray = [
-                aboveLeft,
-                above,
-                left,
-                belowLeft,
-                below
-            ]
+            squaresTouchingArray = [aboveLeft, above, left, belowLeft, below];
         } else {
             squaresTouchingArray = [
                 aboveLeft,

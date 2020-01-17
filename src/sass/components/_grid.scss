@@ -1,0 +1,13 @@
+// ----------------------------------------------------------------------------
+// Grid
+// ----------------------------------------------------------------------------
+
+.grid {
+    display: grid;
+    font-family: 'Verdana', sans-serif;
+    grid-template-areas: 'board';
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}

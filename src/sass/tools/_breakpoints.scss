@@ -1,0 +1,38 @@
+// ----------------------------------------------------------------------------
+// Breakpoints
+// ----------------------------------------------------------------------------
+
+$breakpoint-s: 600px;
+$breakpoint-m: 900px;
+$breakpoint-l: 1200px;
+$breakpoint-xl: 1800px;
+
+@mixin xsmall {
+    @media only screen and (max-width: $breakpoint-s) {
+        @content;
+    }
+}
+
+@mixin small {
+    @media only screen and (min-width: $breakpoint-s) {
+        @content;
+    }
+}
+
+@mixin medium {
+    @media only screen and (min-width: $breakpoint-m) {
+        @content;
+    }
+}
+
+@mixin large {
+    @media only screen and (min-width: $breakpoint-l) {
+        @content;
+    }
+}
+
+@mixin xlarge {
+    @media only screen and (min-width: $breakpoint-xl) {
+        @content;
+    }
+}
