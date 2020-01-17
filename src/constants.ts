@@ -8,16 +8,16 @@ export const smallBoard = {
 
 export const medBoard = {
     boardSize: 'medium',
-    numSquares: 256,
-    numMines: 40,
-    colSize: 16,
-    rowSize: 16,
+    numSquares: 144,
+    numMines: 24,
+    colSize: 12,
+    rowSize: 12,
 };
 
 export const largeBoard = {
     boardSize: 'large',
-    numSquares: 480,
-    numMines: 99,
+    numSquares: 256,
+    numMines: 48,
     colSize: 16,
-    rowSize: 30,
+    rowSize: 16,
 };

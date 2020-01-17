@@ -1,4 +1,4 @@
-const setInitialFlaggedSquares = (numSquares: number) => {
+const setFlaggedSquares = (numSquares: number) => {
     let squares = [];
     for (let i = 0; i < numSquares; i++) {
         squares.push(false);
@@ -6,4 +6,4 @@ const setInitialFlaggedSquares = (numSquares: number) => {
     return squares;
 };
 
-export default setInitialFlaggedSquares;
+export default setFlaggedSquares;

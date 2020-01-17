@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../sass/styles.scss';
 import {
     useDispatch,
@@ -7,7 +7,7 @@ import {
 } from 'react-redux';
 import { AppState } from '../reducers/index';
 import Board from './Board';
-import Header from './Header';
+import BoardSizeSelect from './BoardSizeSelect';
 import NewGameButton from './NewGameButton';
 import Square from './Square';
 import { smallBoard, medBoard, largeBoard } from '../constants';
@@ -23,8 +23,6 @@ type Board = {
     rowSize: number;
 };
 
-const mines = setMines(smallBoard);
-
 const createSquares = (board: Board) => {
     let squares = [];
     for (let i = 0; i < board.numSquares; i++) {
@@ -35,20 +33,35 @@ const createSquares = (board: Board) => {
 
 const App: React.FC = () => {
     const dispatch = useDispatch();
-    React.useEffect(() => {
-        dispatch(actions.setMines(mines));
-    }, []);
     const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
     const state = useSelector(state => state);
+    const mines = setMines(state.board);
+
+    useEffect(() => {
+        dispatch(actions.setMines(mines));
+        dispatch(actions.setBoardSize(state.board));
+    }, []);
+
     const displayWin =
         state.moves.length +
             state.flaggedSquares.filter(square => square).length ===
-        smallBoard.numSquares;
+        state.board.numSquares;
     const displayLoss = state.losingSquare !== null;
 
     return (
         <div className="grid">
-            <Board>{createSquares(smallBoard)}</Board>
+            <div
+                className={`board ${
+                    state.board.boardSize === 'small'
+                        ? 'board--small'
+                        : state.board.boardSize === 'medium'
+                        ? 'board--medium'
+                        : 'board--large'
+                }`}
+            >
+                {createSquares(state.board)}
+            </div>
+            <BoardSizeSelect />
             <NewGameButton />
             {displayWin ? (
                 <h1>YOU WON!</h1>

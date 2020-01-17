@@ -6,6 +6,14 @@ import {
     SET_MINES,
 } from './actionTypes';
 
+type Board = {
+    boardSize: string;
+    numSquares: number;
+    numMines: number;
+    colSize: number;
+    rowSize: number;
+} | undefined;
+
 const clickMine = (index: number) => ({
     type: CLICK_MINE,
     payload: { index },
@@ -26,9 +34,9 @@ const setMines = (mines: number[]) => ({
     payload: { mines },
 });
 
-const setBoardSize = (boardSize: string) => ({
+const setBoardSize = (board: Board) => ({
     type: SET_BOARD_SIZE,
-    payload: { boardSize },
+    payload: { board },
 });
 
 const actions = {

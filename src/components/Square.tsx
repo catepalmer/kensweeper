@@ -13,7 +13,7 @@ import checkIfFlagged from '../utilities/checkIfFlagged';
 import checkIfMine from '../utilities/checkIfMine';
 import checkIfPlayed from '../utilities/checkIfPlayed';
 import getMinesTouching from '../utilities/getMinesTouching';
-import setInitialFlaggedSquares from '../utilities/setInitialFlaggedSquares';
+import setFlaggedSquares from '../utilities/setFlaggedSquares';
 import actions from '../actions/actions';
 
 import flag from '../images/flag.png';
@@ -29,14 +29,10 @@ const Square = ({ index, boardSize }: SquareProps) => {
     const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
     const dispatch = useDispatch();
     const state = useSelector(state => state);
-
     const mines = state ? state.mines : [];
     const moves = state ? state.moves : [];
     const losingSquare = state ? state.losingSquare : '';
-    const flaggedSquares = state
-        ? state.flaggedSquares
-        : setInitialFlaggedSquares(81);
-
+    const flaggedSquares = state ? state.flaggedSquares : setFlaggedSquares(64);
     const isMine = checkIfMine(index, mines);
     const isLosingSquare = losingSquare === index;
     const isFlagged = checkIfFlagged(index, flaggedSquares);
@@ -71,9 +67,6 @@ const Square = ({ index, boardSize }: SquareProps) => {
     };
 
     const handleClick = () => {
-        console.log(
-            `mines: ${mines}. index: ${index}. minesTouching: ${minesTouching}`
-        );
         dispatch(
             isMine ? actions.clickMine(index) : actions.clickSquare(index)
         );

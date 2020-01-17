@@ -25,7 +25,28 @@ const getSquaresTouching = (index: number | undefined, boardSize: string) => {
             belowLeft = index + 7;
             below = index + 8;
             belowRight = index + 9;
-            squaresTouchingArray;
+        } else if (boardSize === 'medium') {
+            inTopRow = index < 12;
+            inBottomRow = index > 132;
+            inLeftColumn = index % 12 === 0;
+            inRightColumn = (index + 1) % 12 === 0;
+            aboveLeft = index - 13;
+            above = index - 12;
+            aboveRight = index - 11;
+            belowLeft = index + 11;
+            below = index + 12;
+            belowRight = index + 13;
+        } else if (boardSize === 'large') {
+            inTopRow = index < 16;
+            inBottomRow = index > 240;
+            inLeftColumn = index % 16 === 0;
+            inRightColumn = (index + 1) % 16 === 0;
+            aboveLeft = index - 17;
+            above = index - 16;
+            aboveRight = index - 15;
+            belowLeft = index + 15;
+            below = index + 16;
+            belowRight = index + 17;
         }
 
         if (inTopRow) {

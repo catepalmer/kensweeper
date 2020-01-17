@@ -5,14 +5,21 @@ import {
     SET_MINES,
     SET_BOARD_SIZE,
 } from '../actions/actionTypes';
-import setInitialFlaggedSquares from '../utilities/setInitialFlaggedSquares';
+import setFlaggedSquares from '../utilities/setFlaggedSquares';
+import { smallBoard } from '../constants';
 
 export type Action = {
     type: string;
     payload: {
         index?: number | undefined;
         mines?: number[];
-        boardSize?: string;
+        board: {
+            boardSize: string;
+            numSquares: number;
+            numMines: number;
+            colSize: number;
+            rowSize: number;
+        };
     };
 };
 
@@ -20,8 +27,8 @@ const initialState = {
     losingSquare: null,
     mines: [],
     moves: [],
-    flaggedSquares: setInitialFlaggedSquares(81),
-    boardSize: 'small',
+    flaggedSquares: setFlaggedSquares(64),
+    board: smallBoard
 };
 
 export const reducer = (state = initialState, action: Action) => {
@@ -78,7 +85,10 @@ export const reducer = (state = initialState, action: Action) => {
         case SET_BOARD_SIZE: {
             return {
                 ...state,
-                boardSize: action.payload.boardSize,
+                boardSize: action.payload.board.boardSize,
+                flaggedSquares: action.payload.board.numSquares
+                    ? setFlaggedSquares(action.payload.board.numSquares)
+                    : state.flaggedSquares,
             };
         }
         default: {

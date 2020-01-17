@@ -1,0 +1,33 @@
+// ----------------------------------------------------------------------------
+// Board
+// ----------------------------------------------------------------------------
+
+.board {
+    align-self: center;
+    display: grid;
+    grid-area: board;
+    grid-gap: 0;
+    justify-self: center;
+    margin: auto;
+}
+
+.board--small {
+    grid-template-columns: repeat(8, 6vh);
+    grid-template-rows: repeat(8, 6vh);
+    height: 48vh;
+    width: 48vh;
+}
+
+.board--medium {
+    grid-template-columns: repeat(12, 6vh);
+    grid-template-rows: repeat(12, 6vh);
+    height: 72vh;
+    width: 72vh;
+}
+
+.board--large {
+    grid-template-columns: repeat(16, 6vh);
+    grid-template-rows: repeat(16, 6vh);
+    height: 96vh;
+    width: 96vh;
+}

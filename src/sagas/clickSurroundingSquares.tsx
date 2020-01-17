@@ -22,11 +22,15 @@ function* clickSurroundingSquares(action: Action) {
 
     if (squaresTouchingArray) {
         const squaresToReveal = squaresTouchingArray.filter(square => {
-            return !checkIfPlayed(square, moves);
+            if (square) {
+                return !checkIfPlayed(square, moves);
+            }
         });
 
         const squaresToRevealActions = squaresToReveal.map(square => {
-            return put(actions.clickSquare(square));
+            if (square) {
+                return put(actions.clickSquare(square));
+            }
         });
 
         yield all(squaresToRevealActions);
