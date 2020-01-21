@@ -21,11 +21,14 @@ const BoardSizeSelect = () => {
         if (board) dispatch(actions.setBoardSize(board));
     };
     return (
+        <form>
         <select onChange={e => setBoardSize(e.target.value)} value={boardSize}>
             <option value="small">Small</option>
             <option value="medium">Medium</option>
             <option value="large">Large</option>
         </select>
+        <input type="submit" value="New Game"></input>
+        </form>
     );
 };
 

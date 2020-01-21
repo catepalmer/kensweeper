@@ -50,13 +50,6 @@ const App: React.FC = () => {
     return (
         <>
             <BoardSizeSelect />
-            {displayWin ? (
-                <h1>YOU WON!</h1>
-            ) : displayLoss ? (
-                <h1>YOU LOST!</h1>
-            ) : (
-                ''
-            )}
             <div
                 className={`grid ${
                     boardSize === 'small'
