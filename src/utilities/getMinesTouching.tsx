@@ -8,7 +8,7 @@ const getMinesTouching = (
     const squaresTouchingArray = getSquaresTouching(index, boardSize);
     if (mines && squaresTouchingArray) {
         const minesTouchingArray = squaresTouchingArray.filter(
-            square => square && mines.includes(square)
+            square => square !== undefined && mines.includes(square)
         );
         return minesTouchingArray.length;
     }

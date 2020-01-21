@@ -23,13 +23,13 @@ function* clickSurroundingSquares(action: Action) {
 
     if (squaresTouchingArray) {
         const squaresToReveal = squaresTouchingArray.filter(square => {
-            if (square) {
+            if (square !== undefined) {
                 return !checkIfPlayed(square, moves);
             }
         });
 
         const squaresToRevealActions = squaresToReveal.map(square => {
-            if (square) {
+            if (square !== undefined) {
                 return put(actions.clickSquare(square));
             }
         });

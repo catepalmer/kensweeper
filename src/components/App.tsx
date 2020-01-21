@@ -36,7 +36,6 @@ const App: React.FC = () => {
     const mines = setMines(state.board);
     const { board, flaggedSquares, losingSquare, moves } = state;
     const { boardSize } = board;
-    console.log(`moves: ${moves}`)
 
     useEffect(() => {
         dispatch(actions.setMines(mines));

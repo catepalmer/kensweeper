@@ -18,6 +18,7 @@ import actions from '../actions/actions';
 import flag from '../images/flag.png';
 import ken from '../images/ken.jpg';
 import mine from '../images/mine.png';
+import getSquaresTouching from '../utilities/getSquaresTouching';
 
 type SquareProps = {
     index: number;
