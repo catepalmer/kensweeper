@@ -6,8 +6,21 @@
     display: grid;
     font-family: 'Verdana', sans-serif;
     grid-template-areas: 'board';
-    height: 100vh;
     margin: 0;
     padding: 0;
-    width: 100vw;
+}
+
+.grid--small {
+    height: 56vh;
+    width: 56vh;
+}
+
+.grid--medium {
+    height: 84vh;
+    width: 84vh;
+}
+
+.grid--large {
+    height: 112vh;
+    width: 112vh;
 }

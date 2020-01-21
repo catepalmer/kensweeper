@@ -8,9 +8,7 @@ import {
 import { AppState } from '../reducers/index';
 import Board from './Board';
 import BoardSizeSelect from './BoardSizeSelect';
-import NewGameButton from './NewGameButton';
 import Square from './Square';
-import { smallBoard, medBoard, largeBoard } from '../constants';
 
 import setMines from '../utilities/setMines';
 import actions from '../actions/actions';
@@ -36,33 +34,23 @@ const App: React.FC = () => {
     const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
     const state = useSelector(state => state);
     const mines = setMines(state.board);
+    const { board, flaggedSquares, losingSquare, moves } = state;
+    const { boardSize } = board;
+    console.log(`moves: ${moves}`)
 
     useEffect(() => {
         dispatch(actions.setMines(mines));
-        dispatch(actions.setBoardSize(state.board));
-    }, []);
+        dispatch(actions.setBoardSize(board));
+    }, [board]);
 
     const displayWin =
-        state.moves.length +
-            state.flaggedSquares.filter(square => square).length ===
-        state.board.numSquares;
-    const displayLoss = state.losingSquare !== null;
+        moves.length + flaggedSquares.filter(square => square).length ===
+        board.numSquares;
+    const displayLoss = losingSquare !== null;
 
     return (
-        <div className="grid">
-            <div
-                className={`board ${
-                    state.board.boardSize === 'small'
-                        ? 'board--small'
-                        : state.board.boardSize === 'medium'
-                        ? 'board--medium'
-                        : 'board--large'
-                }`}
-            >
-                {createSquares(state.board)}
-            </div>
+        <>
             <BoardSizeSelect />
-            <NewGameButton />
             {displayWin ? (
                 <h1>YOU WON!</h1>
             ) : displayLoss ? (
@@ -70,7 +58,28 @@ const App: React.FC = () => {
             ) : (
                 ''
             )}
-        </div>
+            <div
+                className={`grid ${
+                    boardSize === 'small'
+                        ? 'grid--small'
+                        : boardSize === 'medium'
+                        ? 'grid--medium'
+                        : 'grid--large'
+                }`}
+            >
+                <div
+                    className={`board ${
+                        boardSize === 'small'
+                            ? 'board--small'
+                            : boardSize === 'medium'
+                            ? 'board--medium'
+                            : 'board--large'
+                    }`}
+                >
+                    {createSquares(board)}
+                </div>
+            </div>
+        </>
     );
 };
 

@@ -28,7 +28,7 @@ const initialState = {
     mines: [],
     moves: [],
     flaggedSquares: setFlaggedSquares(64),
-    board: smallBoard
+    board: smallBoard,
 };
 
 export const reducer = (state = initialState, action: Action) => {
@@ -85,7 +85,9 @@ export const reducer = (state = initialState, action: Action) => {
         case SET_BOARD_SIZE: {
             return {
                 ...state,
-                boardSize: action.payload.board.boardSize,
+                losingSquare: null,
+                moves: [],
+                board: action.payload.board,
                 flaggedSquares: action.payload.board.numSquares
                     ? setFlaggedSquares(action.payload.board.numSquares)
                     : state.flaggedSquares,

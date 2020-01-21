@@ -13,8 +13,9 @@ type Action = {
 };
 
 function* clickSurroundingSquares(action: Action) {
-    const { mines, moves, boardSize } = yield select();
+    const { mines, moves, board } = yield select();
     const index = action.payload.index;
+    const { boardSize } = board;
     const minesTouching = getMinesTouching(index, mines, boardSize);
     const squaresTouchingArray = getSquaresTouching(index, boardSize);
 

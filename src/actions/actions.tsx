@@ -12,7 +12,7 @@ type Board = {
     numMines: number;
     colSize: number;
     rowSize: number;
-} | undefined;
+};
 
 const clickMine = (index: number) => ({
     type: CLICK_MINE,

@@ -1,6 +1,5 @@
-import React, { CSSProperties, MouseEvent, ReactElement } from 'react';
+import React, { MouseEvent } from 'react';
 import '../sass/styles.scss';
-import styled from 'styled-components';
 import {
     useDispatch,
     useSelector as useReduxSelector,
