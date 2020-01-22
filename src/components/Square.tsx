@@ -32,7 +32,7 @@ const Square = ({ index, boardSize }: SquareProps) => {
     const mines = state ? state.mines : [];
     const moves = state ? state.moves : [];
     const losingSquare = state ? state.losingSquare : '';
-    const flaggedSquares = state ? state.flaggedSquares : setFlaggedSquares(64);
+    const flaggedSquares = state ? state.flaggedSquares : [];
     const isMine = checkIfMine(index, mines);
     const isLosingSquare = losingSquare === index;
     const isFlagged = checkIfFlagged(index, flaggedSquares);
