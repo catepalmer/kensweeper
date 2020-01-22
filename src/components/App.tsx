@@ -8,7 +8,7 @@ import {
 import { AppState } from '../reducers/index';
 import Board from './Board';
 import BoardSizeSelect from './BoardSizeSelect';
-import MinesCounter from './MinesCounter';
+import Header from './Header';
 import Square from './Square';
 
 import setMines from '../utilities/setMines';
@@ -51,7 +51,7 @@ const App: React.FC = () => {
     return (
         <>
             <BoardSizeSelect />
-            <MinesCounter />
+            <Header />
             <div
                 className={`grid ${
                     boardSize === 'small'

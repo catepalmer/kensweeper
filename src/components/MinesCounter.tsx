@@ -11,12 +11,15 @@ const MinesCounter = () => {
     const state = useSelector(state => state);
     const mines = state ? state.mines : [];
     const flaggedSquares = state ? state.flaggedSquares : [];
-    const minesFlagged = flaggedSquares && flaggedSquares.filter(square => square);
+    const minesFlagged =
+        flaggedSquares && flaggedSquares.filter(square => square);
     const minesRemaining = mines && mines.length - minesFlagged.length;
 
-    return (<div>
-        Mines Remaining: {minesRemaining}
-    </div>);
+    return (
+        <div>
+            {minesRemaining}
+        </div>
+    );
 };
 
 export default MinesCounter;

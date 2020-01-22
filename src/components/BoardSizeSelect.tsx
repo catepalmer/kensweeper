@@ -7,7 +7,7 @@ import '../sass/styles.scss';
 const BoardSizeSelect = () => {
     const dispatch = useDispatch();
     const [boardSize, setBoardSize] = useState('');
-    
+
     const handleClick = () => {
         const boardSizes = [smallBoard, medBoard, largeBoard];
         const board = boardSizes.find(boardType => {

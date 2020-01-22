@@ -1,21 +1,35 @@
 import React from 'react';
-import styled from 'styled-components';
+import {
+    useSelector as useReduxSelector,
+    TypedUseSelectorHook,
+} from 'react-redux';
+import { AppState } from '../reducers/index';
+import { smallBoard } from '../constants';
+import Ken from './Ken';
+import MinesCounter from './MinesCounter';
+import Timer from './Timer';
 import '../sass/styles.scss';
 
-const StyledHeader = styled.div`
-    border-color: hsla(0, 0%, 0%, 0.2);
-    border-style: solid;
-    border-width: 2px;
-    cursor: default;
-    font-size: 4vh;
-    font-weight: bold;
-    line-height: 10vh;
-    text-align: center;
-    text-transform: uppercase;
-`;
-
 const Header = () => {
-    return <StyledHeader />;
+    const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
+    const state = useSelector(state => state);
+    const board = state ? state.board : smallBoard;
+
+    return (
+        <div
+            className={`header ${
+                board.boardSize === 'small'
+                    ? 'header--small'
+                    : board.boardSize === 'medium'
+                    ? 'header--medium'
+                    : 'header--large'
+            }`}
+        >
+            <MinesCounter />
+            <Ken />
+            <Timer />
+        </div>
+    );
 };
 
 export default Header;

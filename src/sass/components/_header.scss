@@ -1,0 +1,41 @@
+// ----------------------------------------------------------------------------
+// Header
+// ----------------------------------------------------------------------------
+
+.header {
+    height: 9vh;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 2px;
+    font-size: 4vh;
+    font-weight: bold;
+    line-height: 7vh;
+    text-align: center;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    > div {
+        height: 6vh;
+        width: 6vh;
+        border-color: rgba(0, 0, 0, 0.2);
+        border-style: solid;
+        border-width: 2px;
+        font-size: 3vh;
+        font-weight: bold;
+        line-height: 6vh;
+        text-align: center;
+    }
+}
+
+.header--small {
+    width: 48vh;
+}
+
+.header--medium {
+    width: 72vh;
+}
+
+.header--large {
+    width: 96vh;
+}
