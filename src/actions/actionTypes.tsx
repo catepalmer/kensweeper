@@ -3,3 +3,4 @@ export const CLICK_SQUARE = 'CLICK_SQUARE';
 export const FLAG_SQUARE = 'FLAG_SQUARE';
 export const SET_MINES = 'SET_MINES';
 export const SET_BOARD_SIZE = 'SET_BOARD_SIZE';
+export const SET_INITIAL_TIME = 'SET_INITIAL_TIME';

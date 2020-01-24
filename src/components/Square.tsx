@@ -70,6 +70,8 @@ const Square = ({ index, boardSize }: SquareProps) => {
         dispatch(
             isMine ? actions.clickMine(index) : actions.clickSquare(index)
         );
+        const initialTime = new Date().getTime();
+        dispatch(actions.setInitialTime(initialTime));
     };
 
     return (

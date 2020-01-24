@@ -4,6 +4,7 @@ import {
     FLAG_SQUARE,
     SET_MINES,
     SET_BOARD_SIZE,
+    SET_INITIAL_TIME
 } from '../actions/actionTypes';
 import setFlaggedSquares from '../utilities/setFlaggedSquares';
 import { smallBoard } from '../constants';
@@ -20,6 +21,7 @@ export type Action = {
             colSize: number;
             rowSize: number;
         };
+        initialTime?: number;
     };
 };
 
@@ -29,6 +31,7 @@ const initialState = {
     moves: [],
     flaggedSquares: setFlaggedSquares(64),
     board: smallBoard,
+    initialTime: undefined
 };
 
 export const reducer = (state = initialState, action: Action) => {
@@ -92,6 +95,12 @@ export const reducer = (state = initialState, action: Action) => {
                     ? setFlaggedSquares(action.payload.board.numSquares)
                     : state.flaggedSquares,
             };
+        }
+        case SET_INITIAL_TIME: {
+            return {
+                ...state,
+                initialTime: state.initialTime ? state.initialTime : action.payload.initialTime
+            }
         }
         default: {
             return {

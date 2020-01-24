@@ -4,6 +4,7 @@ import {
     FLAG_SQUARE,
     SET_BOARD_SIZE,
     SET_MINES,
+    SET_INITIAL_TIME
 } from './actionTypes';
 
 type Board = {
@@ -39,12 +40,18 @@ const setBoardSize = (board: Board) => ({
     payload: { board },
 });
 
+const setInitialTime = (initialTime: number) => ({
+    type: SET_INITIAL_TIME,
+    PAYLOAD: { initialTime }
+})
+
 const actions = {
     clickMine,
     clickSquare,
     flagSquare,
     setMines,
     setBoardSize,
+    setInitialTime,
 };
 
 export default actions;
