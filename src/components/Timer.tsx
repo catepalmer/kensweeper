@@ -15,6 +15,11 @@ const Timer = () => {
 	const isGameOver =
 		moves.length + flaggedSquares.filter((square) => square).length === board.numSquares || losingSquare !== null;
 
+	const hours = time ? Math.floor(time / 3600) : 0;
+	const mins = time ? Math.floor((time % 3600) / 60) : 0;
+	const secs = time ? Math.floor(time % 60) : 0;
+	const displayTime = `${hours > 0 ? hours + ':' : ''}${mins > 0 ? mins + ':' : ''}${secs}`;
+
 	const useInterval = (callback: Callback, delay: Delay) => {
 		const savedCallback = useRef(callback);
 
@@ -50,7 +55,7 @@ const Timer = () => {
 
 	useInterval(timer, isGameOver || !isGameInProgress ? null : 100);
 
-	return <div>{time}</div>;
+	return <div>{displayTime}</div>;
 };
 
 export default Timer;
