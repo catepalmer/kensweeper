@@ -4,7 +4,9 @@ import {
 	FLAG_SQUARE,
 	SET_MINES,
 	SET_BOARD_SIZE,
-	SET_INITIAL_TIME
+	SET_INITIAL_TIME,
+	SET_TIME,
+	SET_GAME_IN_PROGRESS
 } from '../actions/actionTypes';
 import setFlaggedSquares from '../utilities/setFlaggedSquares';
 import { smallBoard } from '../constants';
@@ -21,7 +23,9 @@ export type Action = {
 			colSize: number;
 			rowSize: number;
 		};
-		initialTime?: number;
+		initialTime?: number | undefined;
+		time?: number;
+		isGameInProgress: boolean;
 	};
 };
 
@@ -31,7 +35,9 @@ const initialState = {
 	moves: [],
 	flaggedSquares: setFlaggedSquares(64),
 	board: smallBoard,
-	initialTime: undefined
+	initialTime: undefined,
+	time: 0,
+	isGameInProgress: false
 };
 
 export const reducer = (state = initialState, action: Action) => {
@@ -78,13 +84,29 @@ export const reducer = (state = initialState, action: Action) => {
 				board: action.payload.board,
 				flaggedSquares: action.payload.board.numSquares
 					? setFlaggedSquares(action.payload.board.numSquares)
-					: state.flaggedSquares
+					: state.flaggedSquares,
+				time: 0
 			};
 		}
 		case SET_INITIAL_TIME: {
 			return {
 				...state,
-				initialTime: state.initialTime ? state.initialTime : action.payload.initialTime
+				initialTime:
+					action.payload.initialTime === undefined
+						? action.payload.initialTime
+						: state.initialTime ? state.initialTime : action.payload.initialTime
+			};
+		}
+		case SET_TIME: {
+			return {
+				...state,
+				time: action.payload.time
+			};
+		}
+		case SET_GAME_IN_PROGRESS: {
+			return {
+				...state,
+				isGameInProgress: action.payload.isGameInProgress
 			};
 		}
 		default: {

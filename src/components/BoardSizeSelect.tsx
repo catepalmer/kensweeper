@@ -13,7 +13,12 @@ const BoardSizeSelect = () => {
 		const board = boardSizes.find((boardType) => {
 			return boardType.boardSize === boardSize;
 		});
-		if (board) dispatch(actions.setBoardSize(board));
+		if (board) {
+			dispatch(actions.setBoardSize(board));
+			dispatch(actions.setTime(0));
+			dispatch(actions.setInitialTime(undefined));
+			dispatch(actions.setGameInProgress(false));
+		}
 	};
 
 	return (
