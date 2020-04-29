@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector as useReduxSelector, TypedUseSelectorHook } from 'react-redux';
 import { AppState } from '../reducers/index';
 import actions from '../actions/actions';
+import getDisplayTime from '../utilities/getDisplayTime';
 import '../sass/styles.scss';
 
 type Callback = () => void;
@@ -14,11 +15,10 @@ const Timer = () => {
 	const dispatch = useDispatch();
 	const isGameOver =
 		moves.length + flaggedSquares.filter((square) => square).length === board.numSquares || losingSquare !== null;
-
 	const hours = time ? Math.floor(time / 3600) : 0;
 	const mins = time ? Math.floor((time % 3600) / 60) : 0;
 	const secs = time ? Math.floor(time % 60) : 0;
-	const displayTime = `${hours > 0 ? hours + ':' : ''}${mins > 0 ? mins + ':' : ''}${secs}`;
+	const displayTime = getDisplayTime(hours, mins, secs);
 
 	const useInterval = (callback: Callback, delay: Delay) => {
 		const savedCallback = useRef(callback);
