@@ -13,6 +13,8 @@ import actions from '../actions/actions';
 
 import flag from '../images/flag.png';
 import ken from '../images/ken.jpg';
+import kenSad from '../images/ken-sad.png';
+import kenHappy from '../images/ken-sunglasses.png';
 import mine from '../images/mine.png';
 import getSquaresTouching from '../utilities/getSquaresTouching';
 
@@ -25,10 +27,7 @@ const Square = ({ index, boardSize }: SquareProps) => {
 	const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
 	const dispatch = useDispatch();
 	const state = useSelector((state) => state);
-	const mines = state ? state.mines : [];
-	const moves = state ? state.moves : [];
-	const losingSquare = state ? state.losingSquare : '';
-	const flaggedSquares = state ? state.flaggedSquares : [];
+	const { mines, moves, flaggedSquares, board, losingSquare } = state;
 	const isMine = checkIfMine(index, mines);
 	const isLosingSquare = losingSquare === index;
 	const isFlagged = checkIfFlagged(index, flaggedSquares);
@@ -36,7 +35,13 @@ const Square = ({ index, boardSize }: SquareProps) => {
 	const minesTouching = getMinesTouching(index, mines, boardSize);
 	const displayMinesTouching = checkDisplayMinesTouching(isPlayed, isMine, isFlagged, minesTouching);
 	const displayImage = checkDisplayImage(isPlayed, isMine, isFlagged, minesTouching, losingSquare);
-	const imageSrc = isFlagged ? flag : isMine ? mine : minesTouching === 0 ? ken : '';
+	const isGameWon = moves.length + flaggedSquares.filter((square) => square).length === board.numSquares;
+	const isGameLost = losingSquare !== null;
+	const imageSrc = isFlagged
+		? flag
+		: isMine
+			? mine
+			: minesTouching === 0 && isGameWon ? kenHappy : minesTouching === 0 && isGameLost ? kenSad : ken;
 
 	const handleRightClick = (e: MouseEvent) => {
 		e.preventDefault();
