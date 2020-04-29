@@ -13,8 +13,6 @@ const Ken = () => {
 	const isGameWon = moves.length + flaggedSquares.filter((square) => square).length === board.numSquares;
 	const isGameLost = losingSquare !== null;
 
-	console.log(state);
-
 	return (
 		<div className="ken">
 			<img src={isGameWon ? kenHappy : isGameLost ? kenSad : ken} className="image--small" />

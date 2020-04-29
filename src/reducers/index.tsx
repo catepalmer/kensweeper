@@ -46,21 +46,26 @@ export const reducer = (state = initialState, action: Action) => {
 			return {
 				...state,
 				losingSquare: action.payload.index,
-				moves: [ ...state.moves.filter((move, i) => state.moves.indexOf(move) === i), action.payload.index ]
+				moves: [
+					...state.moves.filter((move, i) => state.moves.indexOf(move) === i),
+					action.payload.index
+				].sort((a, b) => {
+					if (a && b) return a - b;
+					else return 0;
+				})
 			};
 		}
 		case CLICK_SQUARE: {
-			if (typeof action.payload.index === 'number') {
-				return {
-					...state,
-					moves: [ ...state.moves.filter((move, i) => state.moves.indexOf(move) === i), action.payload.index ]
-				};
-			} else if (typeof action.payload.index === 'object') {
-				return {
-					...state,
-					moves: [ ...state.moves.filter((move, i) => state.moves.indexOf(move) === i), action.payload.index ]
-				};
-			}
+			return {
+				...state,
+				moves: [
+					...state.moves.filter((move, i) => state.moves.indexOf(move) === i),
+					action.payload.index
+				].sort((a, b) => {
+					if (a && b) return a - b;
+					else return 0;
+				})
+			};
 		}
 		case FLAG_SQUARE: {
 			return {
