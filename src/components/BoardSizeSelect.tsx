@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { smallBoard, medBoard, largeBoard } from '../constants';
 import actions from '../actions/actions';
+import setMines from '../utilities/setMines';
 import '../sass/styles.scss';
 
 const BoardSizeSelect = () => {
@@ -14,7 +15,9 @@ const BoardSizeSelect = () => {
 			return boardType.boardSize === boardSize;
 		});
 		if (board) {
+			const mines = setMines(board);
 			dispatch(actions.setBoardSize(board));
+			dispatch(actions.setMines(mines));
 			dispatch(actions.setTime(0));
 			dispatch(actions.setInitialTime(undefined));
 			dispatch(actions.setGameInProgress(false));
