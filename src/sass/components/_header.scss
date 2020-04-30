@@ -15,20 +15,30 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	> div {
-		height: 6vh;
-		width: 10vh;
-		border-color: rgba(0, 0, 0, 0.2);
-		border-style: solid;
-		border-width: 2px;
-		font-size: 3vh;
-		font-weight: bold;
-		line-height: 6vh;
-		text-align: center;
-	}
-	> .ken {
-		width: 6vh;
-	}
+}
+
+.header__mines-counter,
+.header__timer,
+.header__button {
+	height: 6vh;
+	width: 10vh;
+	border-color: rgba(0, 0, 0, 0.2);
+	border-style: solid;
+	border-width: 2px;
+	font-size: 3vh;
+	font-weight: bold;
+	line-height: 6vh;
+	text-align: center;
+}
+
+.header__button {
+	background-size: 6vh 6vh;
+	color: 'transparent';
+	outline: 0;
+	width: 6vh;
+	height: 6vh;
+	border-radius: 0;
+	cursor: pointer;
 }
 
 .header--small {
@@ -41,4 +51,19 @@
 
 .header--large {
 	width: 96vh;
+}
+
+.header__options {
+	display: flex;
+	flex-direction: column;
+}
+
+.header__select {
+	display: flex;
+	flex-direction: column;
+	width: 6vh;
+}
+
+.header__option {
+	cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, Fragment, FocusEvent, MouseEvent, useRef } from 'react';
 import { useDispatch, useSelector as useReduxSelector, TypedUseSelectorHook } from 'react-redux';
 import { smallBoard, medBoard, largeBoard } from '../constants';
 import { AppState } from '../reducers/index';
@@ -16,8 +16,13 @@ const BoardSizeSelect = () => {
 	const { moves, flaggedSquares, board, losingSquare } = state;
 	const isGameWon = moves.length + flaggedSquares.filter((square) => square).length === board.numSquares;
 	const isGameLost = losingSquare !== null;
+	const options = useRef<HTMLDivElement | null>(null);
+	const smallOption = useRef<HTMLDivElement | null>(null);
+	const mediumOption = useRef<HTMLDivElement | null>(null);
+	const largeOption = useRef<HTMLDivElement | null>(null);
 
 	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+		console.log(`in onChange`);
 		const boardSizes = [ smallBoard, medBoard, largeBoard ];
 		const board = boardSizes.find((boardType) => {
 			return boardType.boardSize === e.target.value;
@@ -32,23 +37,56 @@ const BoardSizeSelect = () => {
 		}
 	};
 
+	const handleClick = () => {
+		if (options.current && smallOption.current && mediumOption.current && largeOption.current) {
+			const isOptionsHidden = options.current.classList.contains('u-hide');
+
+			if (isOptionsHidden) {
+				options.current.classList.remove('u-hide');
+			}
+		}
+	};
+
+	const handleClickOption = (value: string) => {
+		if (options.current) {
+			const boardSizes = [ smallBoard, medBoard, largeBoard ];
+			const board = boardSizes.find((boardType) => {
+				return boardType.boardSize === value;
+			});
+			if (board) {
+				const mines = setMines(board);
+				dispatch(actions.setBoardSize(board));
+				dispatch(actions.setMines(mines));
+				dispatch(actions.setTime(0));
+				dispatch(actions.setInitialTime(undefined));
+				dispatch(actions.setGameInProgress(false));
+			}
+			options.current.classList.add('u-hide');
+		}
+	};
+
 	const selectStyle = {
 		backgroundImage: `url(${isGameWon ? kenHappy : isGameLost ? kenSad : ken})`,
-		backgroundSize: '6vh 6vh',
-		color: 'transparent',
-		border: 'none',
-		outline: '0',
-		width: '6vh',
-		height: '6vh',
-		borderRadius: '0'
+		border: 'none'
 	};
 
 	return (
-		<select style={selectStyle} onChange={(e) => handleChange(e)} value={board.boardSize}>
-			<option value="small">Small</option>
-			<option value="medium">Medium</option>
-			<option value="large">Large</option>
-		</select>
+		<Fragment>
+			<div className="header__select">
+				<div className="header__button" style={selectStyle} onClick={handleClick} />
+				<div className="header__options u-hide" ref={options}>
+					<div className="header__option" ref={smallOption} onClick={() => handleClickOption('small')}>
+						Small
+					</div>
+					<div className="header__option" ref={mediumOption} onClick={() => handleClickOption('medium')}>
+						Medium
+					</div>
+					<div className="header__option" ref={largeOption} onClick={() => handleClickOption('large')}>
+						Large
+					</div>
+				</div>
+			</div>
+		</Fragment>
 	);
 };
 

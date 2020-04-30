@@ -55,7 +55,7 @@ const Timer = () => {
 
 	useInterval(timer, isGameOver || !isGameInProgress ? null : 100);
 
-	return <div>{displayTime}</div>;
+	return <div className="header__timer">{displayTime}</div>;
 };
 
 export default Timer;

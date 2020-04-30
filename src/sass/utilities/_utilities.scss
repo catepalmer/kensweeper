@@ -5,33 +5,39 @@
 // Colors
 
 .u-color-blue-dark {
-    color: $color-blue-dark;
+	color: $color-blue-dark;
 }
 
 .u-color-blue-light {
-    color: $color-blue-light;
+	color: $color-blue-light;
 }
 
 .u-color-green {
-    color: $color-green;
+	color: $color-green;
 }
 
 .u-color-magenta {
-    color: $color-magenta;
+	color: $color-magenta;
 }
 
 .u-color-pink-hot {
-    color: $color-pink-hot;
+	color: $color-pink-hot;
 }
 
 .u-color-purple {
-    color: $color-purple;
+	color: $color-purple;
 }
 
 .u-color-teal-dark {
-    color: $color-teal-dark;
+	color: $color-teal-dark;
 }
 
 .u-color-teal-light {
-    color: $color-teal-light;
+	color: $color-teal-light;
+}
+
+// Visibility
+
+.u-hide {
+	display: none;
 }
