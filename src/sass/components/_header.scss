@@ -11,7 +11,6 @@
 	font-weight: bold;
 	line-height: 7vh;
 	text-align: center;
-	text-transform: uppercase;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -53,15 +52,29 @@
 	width: 96vh;
 }
 
-.header__options {
+.header__options-outer {
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 .header__select {
 	display: flex;
 	flex-direction: column;
 	width: 6vh;
+}
+
+.header__options-inner {
+	position: absolute;
+	top: 0;
+	left: -34px;
+	border: solid $color-grey 1px;
+	border-radius: 2px;
+	background-color: $color-white;
+	opacity: 1;
+	padding: 8px 16px;
+	font-size: 20px;
+	font-weight: 300;
 }
 
 .header__option {

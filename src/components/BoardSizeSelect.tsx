@@ -58,15 +58,17 @@ const BoardSizeSelect = () => {
 		<Fragment>
 			<div className="header__select">
 				<div className="header__button" style={selectStyle} onClick={handleClick} />
-				<div className="header__options u-hide" ref={options}>
-					<div className="header__option" ref={smallOption} onClick={() => handleClickOption('small')}>
-						Small
-					</div>
-					<div className="header__option" ref={mediumOption} onClick={() => handleClickOption('medium')}>
-						Medium
-					</div>
-					<div className="header__option" ref={largeOption} onClick={() => handleClickOption('large')}>
-						Large
+				<div className="header__options-outer">
+					<div className="header__options-inner u-hide" ref={options}>
+						<div className="header__option" ref={smallOption} onClick={() => handleClickOption('small')}>
+							Small
+						</div>
+						<div className="header__option" ref={mediumOption} onClick={() => handleClickOption('medium')}>
+							Medium
+						</div>
+						<div className="header__option" ref={largeOption} onClick={() => handleClickOption('large')}>
+							Large
+						</div>
 					</div>
 				</div>
 			</div>
