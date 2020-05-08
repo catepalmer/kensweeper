@@ -51,7 +51,7 @@ const Square = ({ index, boardSize }: SquareProps) => {
 	};
 
 	const handleClick = () => {
-		if (isGameWon || isGameLost) return;
+		if (isGameWon || isGameLost || isFlagged) return;
 		dispatch(isMine ? actions.clickMine(index) : actions.clickSquare(index));
 		const initialTime = new Date().getTime();
 		dispatch(actions.setInitialTime(initialTime));

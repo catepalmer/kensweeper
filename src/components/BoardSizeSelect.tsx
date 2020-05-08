@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Fragment, FocusEvent, MouseEvent, useRef } from 'react';
+import React, { Fragment, useRef } from 'react';
 import { useDispatch, useSelector as useReduxSelector, TypedUseSelectorHook } from 'react-redux';
 import { smallBoard, medBoard, largeBoard } from '../constants';
 import { AppState } from '../reducers/index';
@@ -20,22 +20,6 @@ const BoardSizeSelect = () => {
 	const smallOption = useRef<HTMLDivElement | null>(null);
 	const mediumOption = useRef<HTMLDivElement | null>(null);
 	const largeOption = useRef<HTMLDivElement | null>(null);
-
-	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-		console.log(`in onChange`);
-		const boardSizes = [ smallBoard, medBoard, largeBoard ];
-		const board = boardSizes.find((boardType) => {
-			return boardType.boardSize === e.target.value;
-		});
-		if (board) {
-			const mines = setMines(board);
-			dispatch(actions.setBoardSize(board));
-			dispatch(actions.setMines(mines));
-			dispatch(actions.setTime(0));
-			dispatch(actions.setInitialTime(undefined));
-			dispatch(actions.setGameInProgress(false));
-		}
-	};
 
 	const handleClick = () => {
 		if (options.current && smallOption.current && mediumOption.current && largeOption.current) {
