@@ -31,7 +31,7 @@ const App: React.FC = () => {
 	const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
 	const state = useSelector((state) => state);
 	const mines = setMines(state.board);
-	const { board, flaggedSquares, losingSquare, moves } = state;
+	const { board } = state;
 	const { boardSize } = board;
 
 	useEffect(
