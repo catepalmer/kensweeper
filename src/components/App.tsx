@@ -43,19 +43,22 @@ const App: React.FC = () => {
 	);
 
 	return (
-		<div className="margins">
-			<Header />
-			<div
-				className={`grid ${boardSize === 'small'
-					? 'grid--small'
-					: boardSize === 'medium' ? 'grid--medium' : 'grid--large'}`}
-			>
+		<div className="flex">
+			<BoardSizeSelect />
+			<div className="margins">
+				<Header />
 				<div
-					className={`board ${boardSize === 'small'
-						? 'board--small'
-						: boardSize === 'medium' ? 'board--medium' : 'board--large'}`}
+					className={`grid ${boardSize === 'small'
+						? 'grid--small'
+						: boardSize === 'medium' ? 'grid--medium' : 'grid--large'}`}
 				>
-					{createSquares(board)}
+					<div
+						className={`board ${boardSize === 'small'
+							? 'board--small'
+							: boardSize === 'medium' ? 'board--medium' : 'board--large'}`}
+					>
+						{createSquares(board)}
+					</div>
 				</div>
 			</div>
 		</div>

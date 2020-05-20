@@ -1,21 +1,12 @@
 import React, { Fragment, useRef } from 'react';
 import { useDispatch, useSelector as useReduxSelector, TypedUseSelectorHook } from 'react-redux';
 import { smallBoard, medBoard, largeBoard } from '../constants';
-import { AppState } from '../reducers/index';
 import actions from '../actions/actions';
 import setMines from '../utilities/setMines';
-import ken from '../images/ken.jpg';
-import kenSad from '../images/ken-sad.png';
-import kenHappy from '../images/ken-sunglasses.png';
 import '../sass/styles.scss';
 
 const BoardSizeSelect = () => {
-	const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
 	const dispatch = useDispatch();
-	const state = useSelector((state) => state);
-	const { moves, flaggedSquares, board, losingSquare } = state;
-	const isGameWon = moves.length + flaggedSquares.filter((square) => square).length === board.numSquares;
-	const isGameLost = losingSquare !== null;
 	const options = useRef<HTMLDivElement | null>(null);
 	const smallOption = useRef<HTMLDivElement | null>(null);
 	const mediumOption = useRef<HTMLDivElement | null>(null);
@@ -49,15 +40,11 @@ const BoardSizeSelect = () => {
 		}
 	};
 
-	const selectStyle = {
-		backgroundImage: `url(${isGameWon ? kenHappy : isGameLost ? kenSad : ken})`,
-		border: 'none'
-	};
-
 	return (
 		<Fragment>
-			<div className="header__select">
-				<div className="header__button" style={selectStyle} onClick={handleClick} />
+			<div className="select">
+				New Game
+				<div className="header__button" onClick={handleClick} />
 				<div className="header__options-outer">
 					<div className="header__options-inner u-hide" ref={options}>
 						<div className="header__option" ref={smallOption} onClick={() => handleClickOption('small')}>
